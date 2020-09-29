@@ -86,6 +86,6 @@ final class LineInfoCell: UITableViewCell {
     }
     
     func setup(with model: LineInfoModel) {
-        label.text = model.name
+        label.text = model.id.description + " " model.name
     }
 }

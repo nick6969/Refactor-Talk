@@ -46,7 +46,11 @@ final class LineVC: BaseTableVC<LineInfoCell, LineInfoModel> {
     override func configCell(model: LineInfoModel, cell: LineInfoCell) {
         cell.setup(with: model)
     }
-    
+    override func didSelectCell(indexPath: IndexPath, model: LineInfoModel) {
+        let id = model.id
+        let vc = LineDetailVC(lineID: id)
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 struct LineContentModel: Codable {
