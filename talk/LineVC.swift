@@ -36,20 +36,11 @@ final class LineVC: BaseTableVC<LineInfoCell, LineInfoModel> {
             """.data(using: .utf8)!
 
 
-        URLSession.shared.dataTask(with: request) { data, res, err in
-            if err != nil {
-                return
-            }
-            guard let data = data else { return }
-            do {
-                let model = try JSONDecoder().decode(LineContentModel.self, from: data)
-                success?(model.data)
-            } catch {
-                print(error)
-                return
-            }
-
-        }.resume()
+        let loadDataObject = SessionLoader<LineContentModel>(request: request)
+        loadDataObject.loadData{
+            model in
+            success?(model.data)
+        }
     }
     
     override func configCell(model: LineInfoModel, cell: LineInfoCell) {
