@@ -7,35 +7,15 @@
 
 import UIKit
 
-final class MainVC: UIViewController {
-    
-    private lazy var tableView: UITableView = {
-        let tableView: UITableView = UITableView()
-        tableView.registerCell(type: AreaCell.self)
-        tableView.backgroundColor = .clear
-        tableView.bounces = false
-        tableView.tableFooterView = UIView()
-        tableView.rowHeight = 100
-        tableView.delegate = self
-        tableView.dataSource = self
-        return tableView
-    }()
-    
-    private var models: [String] = []
+final class MainVC: BaseTableVC<AreaCell, String> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "區域表"
-        view.backgroundColor = .red
-        view.addSubview(tableView)
-        tableView.mLay(pin: .zero)
-        loadData()
     }
-
-    private
-    func loadData() {
-        
-        var request: URLRequest = URLRequest(url: URL(string: "https://e12d2071b3fe.ngrok.io/newTaipei/garbageTruck/area")!)
+    
+    override func loadData(success: (([String]) -> Void)?) {
+        var request: URLRequest = URLRequest(url: URL(string: "https://4ece5861a7d6.ngrok.io/newTaipei/garbageTruck/area")!)
         request.httpMethod = "POST"
         
         URLSession.shared.dataTask(with: request) { data, res, err in
@@ -45,10 +25,7 @@ final class MainVC: UIViewController {
             guard let data = data else { return }
             do {
                 let model = try JSONDecoder().decode(AreaContentModel.self, from: data)
-                DispatchQueue.main.async {
-                    self.models = model.data
-                    self.tableView.reloadData()
-                }
+                success?(model.data)
             } catch {
                 print(error)
                 return
@@ -57,24 +34,12 @@ final class MainVC: UIViewController {
         }.resume()
     }
     
-}
-
-extension MainVC: UITableViewDataSource, UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return models.count
+    override func configCell(model: String, cell: AreaCell) {
+        cell.setup(with: model)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(with: AreaCell.self)
-        cell.setup(with: models[indexPath.row])
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let area = models[indexPath.row]
-        let vc = LineVC(area: area)
+    override func didSelectCell(indexPath: IndexPath, model: String) {
+        let vc = LineVC(area: model)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
