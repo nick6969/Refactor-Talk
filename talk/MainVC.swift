@@ -25,7 +25,7 @@ final class MainVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "區域表"
         view.backgroundColor = .red
         view.addSubview(tableView)
         tableView.mLay(pin: .zero)
@@ -73,7 +73,9 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        let area = models[indexPath.row]
+        let vc = LineVC(area: area)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }
@@ -102,5 +104,28 @@ final class AreaCell: UITableViewCell {
     
     func setup(with model: String) {
         label.text = model
+    }
+}
+
+final class LineInfoCell: UITableViewCell {
+    
+    private var label: UILabel = UILabel()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupUI()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupUI() {
+        contentView.addSubview(label)
+        label.mLay(pin: .init(top: 20, leading: 20, bottom: 20, trailing: 20))
+    }
+    
+    func setup(with model: LineInfoModel) {
+        label.text = model.name
     }
 }
