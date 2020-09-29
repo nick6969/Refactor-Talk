@@ -14,6 +14,7 @@
 		01C2C4D9252368BF003D02AD /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C2C4D8252368BF003D02AD /* MainVC.swift */; };
 		01C2C4DD25236BC0003D02AD /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C2C4DC25236BC0003D02AD /* UITableViewExtension.swift */; };
 		01C2C4E0252371E7003D02AD /* LineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C2C4DF252371E7003D02AD /* LineVC.swift */; };
+		01C2C4E3252376C1003D02AD /* BaseTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C2C4E2252376C1003D02AD /* BaseTableVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		01C2C4D8252368BF003D02AD /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		01C2C4DC25236BC0003D02AD /* UITableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		01C2C4DF252371E7003D02AD /* LineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineVC.swift; sourceTree = "<group>"; };
+		01C2C4E2252376C1003D02AD /* BaseTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				01C2C4D8252368BF003D02AD /* MainVC.swift */,
 				01C2C4DC25236BC0003D02AD /* UITableViewExtension.swift */,
 				01C2C4DF252371E7003D02AD /* LineVC.swift */,
+				01C2C4E2252376C1003D02AD /* BaseTableVC.swift */,
 			);
 			path = talk;
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 				01C2C4D9252368BF003D02AD /* MainVC.swift in Sources */,
 				01C2C4E0252371E7003D02AD /* LineVC.swift in Sources */,
 				01C2C4BF25236724003D02AD /* AppDelegate.swift in Sources */,
+				01C2C4E3252376C1003D02AD /* BaseTableVC.swift in Sources */,
 				01C2C4DD25236BC0003D02AD /* UITableViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
