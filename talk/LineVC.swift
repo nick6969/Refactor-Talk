@@ -26,7 +26,8 @@ final class LineVC: BaseTableVC<LineInfoCell, LineInfoModel> {
     }
     
     override func loadData(success: (([LineInfoModel]) -> Void)?) {
-        var request: URLRequest = URLRequest(url: URL(string: "https://4ece5861a7d6.ngrok.io/newTaipei/garbageTruck/lines")!)
+        let url = URL(string: "https://4ece5861a7d6.ngrok.io/newTaipei/garbageTruck/lines")!
+        var request: URLRequest = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = """
             {
@@ -35,26 +36,21 @@ final class LineVC: BaseTableVC<LineInfoCell, LineInfoModel> {
             """.data(using: .utf8)!
 
 
-        URLSession.shared.dataTask(with: request) { data, res, err in
-            if err != nil {
-                return
-            }
-            guard let data = data else { return }
-            do {
-                let model = try JSONDecoder().decode(LineContentModel.self, from: data)
-                success?(model.data)
-            } catch {
-                print(error)
-                return
-            }
-
-        }.resume()
+        let loadDataObject = SessionLoader<LineContentModel>(request: request)
+        loadDataObject.loadData{
+            model in
+            success?(model.data)
+        }
     }
     
     override func configCell(model: LineInfoModel, cell: LineInfoCell) {
         cell.setup(with: model)
     }
-    
+    override func didSelectCell(indexPath: IndexPath, model: LineInfoModel) {
+        let id = model.id
+        let vc = LineDetailVC(lineID: id)
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 struct LineContentModel: Codable {

@@ -15,6 +15,8 @@
 		01C2C4DD25236BC0003D02AD /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C2C4DC25236BC0003D02AD /* UITableViewExtension.swift */; };
 		01C2C4E0252371E7003D02AD /* LineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C2C4DF252371E7003D02AD /* LineVC.swift */; };
 		01C2C4E3252376C1003D02AD /* BaseTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C2C4E2252376C1003D02AD /* BaseTableVC.swift */; };
+		9A3A7CF325238103007B3A0E /* SessionLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3A7CF225238103007B3A0E /* SessionLoader.swift */; };
+		9AFF8ECC2523877E002AF242 /* LineDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFF8ECB2523877E002AF242 /* LineDetailVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		01C2C4DC25236BC0003D02AD /* UITableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		01C2C4DF252371E7003D02AD /* LineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineVC.swift; sourceTree = "<group>"; };
 		01C2C4E2252376C1003D02AD /* BaseTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableVC.swift; sourceTree = "<group>"; };
+		9A3A7CF225238103007B3A0E /* SessionLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionLoader.swift; sourceTree = "<group>"; };
+		9AFF8ECB2523877E002AF242 /* LineDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineDetailVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,9 +69,11 @@
 				01C2C4C925236726003D02AD /* LaunchScreen.storyboard */,
 				01C2C4CC25236726003D02AD /* Info.plist */,
 				01C2C4D3252367AB003D02AD /* Layout.swift */,
-				01C2C4D8252368BF003D02AD /* MainVC.swift */,
 				01C2C4DC25236BC0003D02AD /* UITableViewExtension.swift */,
+				01C2C4D8252368BF003D02AD /* MainVC.swift */,
 				01C2C4DF252371E7003D02AD /* LineVC.swift */,
+				9AFF8ECB2523877E002AF242 /* LineDetailVC.swift */,
+				9A3A7CF225238103007B3A0E /* SessionLoader.swift */,
 				01C2C4E2252376C1003D02AD /* BaseTableVC.swift */,
 			);
 			path = talk;
@@ -142,10 +148,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AFF8ECC2523877E002AF242 /* LineDetailVC.swift in Sources */,
 				01C2C4D4252367AB003D02AD /* Layout.swift in Sources */,
 				01C2C4D9252368BF003D02AD /* MainVC.swift in Sources */,
 				01C2C4E0252371E7003D02AD /* LineVC.swift in Sources */,
 				01C2C4BF25236724003D02AD /* AppDelegate.swift in Sources */,
+				9A3A7CF325238103007B3A0E /* SessionLoader.swift in Sources */,
 				01C2C4E3252376C1003D02AD /* BaseTableVC.swift in Sources */,
 				01C2C4DD25236BC0003D02AD /* UITableViewExtension.swift in Sources */,
 			);

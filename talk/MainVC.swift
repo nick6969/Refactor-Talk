@@ -13,25 +13,20 @@ final class MainVC: BaseTableVC<AreaCell, String> {
         super.viewDidLoad()
         title = "區域表"
     }
-    
     override func loadData(success: (([String]) -> Void)?) {
-        var request: URLRequest = URLRequest(url: URL(string: "https://4ece5861a7d6.ngrok.io/newTaipei/garbageTruck/area")!)
+        guard
+            let url = URL(string: "https://4ece5861a7d6.ngrok.io/newTaipei/garbageTruck/area") else {
+            // precondition < assert < fatalError
+           preconditionFailure("URL == nil")
+        }
+        var request: URLRequest = URLRequest(url: url)
         request.httpMethod = "POST"
         
-        URLSession.shared.dataTask(with: request) { data, res, err in
-            if err != nil {
-                return
-            }
-            guard let data = data else { return }
-            do {
-                let model = try JSONDecoder().decode(AreaContentModel.self, from: data)
-                success?(model.data)
-            } catch {
-                print(error)
-                return
-            }
-            
-        }.resume()
+        let loadDataObject = SessionLoader<AreaContentModel>(request: request)
+        loadDataObject.loadData{
+            model in
+            success?(model.data)
+        }
     }
     
     override func configCell(model: String, cell: AreaCell) {
@@ -91,6 +86,6 @@ final class LineInfoCell: UITableViewCell {
     }
     
     func setup(with model: LineInfoModel) {
-        label.text = model.name
+        label.text = model.id.description + " " model.name
     }
 }
