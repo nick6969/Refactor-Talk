@@ -28,7 +28,7 @@ class BaseTableVC<Cell: UITableViewCell, Model: Codable>: UIViewController,UITab
         tableView.backgroundColor = .clear
         tableView.bounces = false
         tableView.tableFooterView = UIView()
-        tableView.rowHeight = 40
+        tableView.rowHeight = 100
         tableView.delegate = self
         tableView.dataSource = self
         return tableView

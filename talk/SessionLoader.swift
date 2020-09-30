@@ -47,4 +47,3 @@ class SessionLoader<DecodeType : Decodable> {
         return task
     }
 }
-}

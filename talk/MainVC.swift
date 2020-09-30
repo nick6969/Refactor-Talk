@@ -15,7 +15,7 @@ final class MainVC: BaseTableVC<AreaCell, String> {
     }
     override func loadData(success: (([String]) -> Void)?) {
         guard
-            let url = URL(string: "https://4ece5861a7d6.ngrok.io/newTaipei/garbageTruck/area") else {
+            let url = URL(string: Settings.apiDomain + "newTaipei/garbageTruck/area") else {
             // precondition < assert < fatalError
            preconditionFailure("URL == nil")
         }
@@ -86,6 +86,6 @@ final class LineInfoCell: UITableViewCell {
     }
     
     func setup(with model: LineInfoModel) {
-        label.text = model.id.description + " " model.name
+        label.text = model.id + " \(model.name)"
     }
 }

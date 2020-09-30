@@ -34,12 +34,12 @@ final class LineDetailVC: BaseTableVC<LineDetailCell, LineDetailModel> {
     /// -H  "Content-Type: application/json"
     /// -d "{  \"lineID\": \"251001\"}"
     override func loadData(success: (([LineDetailModel]) -> Void)?) {
-        let url = URL(string: "https://4ece5861a7d6.ngrok.io/newTaipei/garbageTruck/detail")!
+        let url = URL(string: Settings.apiDomain + "newTaipei/garbageTruck/detail")!
         var request: URLRequest = URLRequest(url: url)
         request.httpMethod = "POST"
         let body = """
             {
-                "lineID": "\(lineID)"
+                "line_id": "\(lineID)"
             }
             """
         print(body)

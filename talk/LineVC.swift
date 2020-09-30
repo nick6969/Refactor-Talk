@@ -26,7 +26,7 @@ final class LineVC: BaseTableVC<LineInfoCell, LineInfoModel> {
     }
     
     override func loadData(success: (([LineInfoModel]) -> Void)?) {
-        let url = URL(string: "https://4ece5861a7d6.ngrok.io/newTaipei/garbageTruck/lines")!
+        let url = URL(string: Settings.apiDomain + "newTaipei/garbageTruck/lines")!
         var request: URLRequest = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = """
