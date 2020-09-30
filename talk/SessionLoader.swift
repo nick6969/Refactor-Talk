@@ -19,7 +19,7 @@ import Foundation
 ///
 
 class SessionLoader<DecodeType : Decodable> {
-    internal init(request: URLRequest) {
+   init(request: URLRequest) {
         self.request = request
     }
     
