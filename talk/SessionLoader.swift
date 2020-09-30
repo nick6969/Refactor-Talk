@@ -26,9 +26,10 @@ class SessionLoader<DecodeType : Decodable> {
     
     let request: URLRequest
     
-    func loadData(success: ((DecodeType) -> Void)?) {
+    @discardableResult
+    func loadData(success: ((DecodeType) -> Void)?) -> URLSessionTask {
     
-        URLSession.shared.dataTask(with: self.request) { data, res, err in
+        let task = URLSession.shared.dataTask(with: self.request) { data, res, err in
             if err != nil {
                 return
             }
@@ -41,6 +42,9 @@ class SessionLoader<DecodeType : Decodable> {
                 return
             }
             
-        }.resume()
+        }
+        task.resume()
+        return task
     }
+}
 }
