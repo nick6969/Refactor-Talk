@@ -10,7 +10,10 @@ import UIKit
 class BaseTableVC<Cell: UITableViewCell, Model: Codable>: UIViewController,UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - NEED OVERRIDE
-    func loadData(success: (([Model]) -> Void)?) {
+    func loadData(
+        success: (([Model]) -> Void)?,
+        failure: ((LoaderError) -> Void)?
+    ) {
         fatalError()
     }
     
@@ -45,6 +48,12 @@ class BaseTableVC<Cell: UITableViewCell, Model: Codable>: UIViewController,UITab
             DispatchQueue.main.async {
                 self.models = models
                 self.tableView.reloadData()
+            }
+        } failure: { error in
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "Error", message: error.message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.navigationController?.present(alert, animated: true, completion: nil)
             }
         }
     }

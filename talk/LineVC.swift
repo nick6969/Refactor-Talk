@@ -25,7 +25,7 @@ final class LineVC: BaseTableVC<LineInfoCell, LineInfoModel> {
         title = area + " 路線清單"
     }
     
-    override func loadData(success: (([LineInfoModel]) -> Void)?) {
+    override func loadData(success: (([LineInfoModel]) -> Void)?, failure: ((LoaderError) -> Void)?) {
         let url = URL(string: Settings.apiDomain + "newTaipei/garbageTruck/lines")!
         var request: URLRequest = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -37,10 +37,8 @@ final class LineVC: BaseTableVC<LineInfoCell, LineInfoModel> {
 
 
         let loadDataObject = SessionLoader<LineContentModel>(request: request)
-        loadDataObject.loadData{
-            model in
-            success?(model.data)
-        }
+        let successHandle: (LineContentModel) -> Void = { success?($0.data) }
+        loadDataObject.loadData (success: successHandle, failure: failure)
     }
     
     override func configCell(model: LineInfoModel, cell: LineInfoCell) {
