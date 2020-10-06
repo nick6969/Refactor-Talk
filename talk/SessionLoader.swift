@@ -50,8 +50,8 @@ class SessionLoader<DecodeType : Decodable> {
     ) -> URLSessionTask {
     
         let task = URLSession.shared.dataTask(with: request) { data, res, err in
-            if err != nil {
-                failure?(.urlSessionError(err!))
+            if let err = err {
+                failure?(.urlSessionError(err))
                 return
             }
             guard let data = data else {
