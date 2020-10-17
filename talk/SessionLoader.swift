@@ -18,27 +18,51 @@ import Foundation
 /// 3. Decodable 的型別
 ///
 
+enum LoaderError {
+    case urlSessionError(Error)
+    case noData
+    case decodeError(Error)
+    
+    var message: String {
+        switch self {
+        case let .urlSessionError(err):
+            return err.localizedDescription
+        case .noData:
+            return "Server return empty data"
+        case let .decodeError(err):
+            return err.localizedDescription
+        }
+    }
+}
+
 class SessionLoader<DecodeType : Decodable> {
+    
    init(request: URLRequest) {
         self.request = request
     }
     
-    
     let request: URLRequest
     
     @discardableResult
-    func loadData(success: ((DecodeType) -> Void)?) -> URLSessionTask {
+    func loadData(
+        success: ((DecodeType) -> Void)?,
+        failure: ((LoaderError) -> Void)?
+    ) -> URLSessionTask {
     
-        let task = URLSession.shared.dataTask(with: self.request) { data, res, err in
-            if err != nil {
+        let task = URLSession.shared.dataTask(with: request) { data, res, err in
+            if let err = err {
+                failure?(.urlSessionError(err))
                 return
             }
-            guard let data = data else { return }
+            guard let data = data else {
+                failure?(.noData)
+                return
+            }
             do {
                 let model = try JSONDecoder().decode(DecodeType.self, from: data)
                 success?(model)
             } catch {
-                print(error)
+                failure?(.decodeError(error))
                 return
             }
             

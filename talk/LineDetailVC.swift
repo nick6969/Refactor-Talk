@@ -33,7 +33,7 @@ final class LineDetailVC: BaseTableVC<LineDetailCell, LineDetailModel> {
     /// -H  "accept: application/json"
     /// -H  "Content-Type: application/json"
     /// -d "{  \"lineID\": \"251001\"}"
-    override func loadData(success: (([LineDetailModel]) -> Void)?) {
+    override func loadData(success: (([LineDetailModel]) -> Void)?, failure: ((LoaderError) -> Void)?) {
         let url = URL(string: Settings.apiDomain + "newTaipei/garbageTruck/detail")!
         var request: URLRequest = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -42,15 +42,11 @@ final class LineDetailVC: BaseTableVC<LineDetailCell, LineDetailModel> {
                 "line_id": "\(lineID)"
             }
             """
-        print(body)
         request.httpBody = body.data(using: .utf8)!
 
         let loadDataObject = SessionLoader<LineDetailContentModel>(request: request)
-        loadDataObject.loadData{
-            model in
-            dump(model)
-            success?(model.data)
-        }
+        let successHandle: (LineDetailContentModel) -> Void = { success?($0.data) }
+        loadDataObject.loadData (success: successHandle, failure: failure)
     }
     
     override func configCell(model: LineDetailModel, cell: LineDetailCell) {

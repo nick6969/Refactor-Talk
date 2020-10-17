@@ -13,7 +13,7 @@ final class MainVC: BaseTableVC<AreaCell, String> {
         super.viewDidLoad()
         title = "區域表"
     }
-    override func loadData(success: (([String]) -> Void)?) {
+    override func loadData(success: (([String]) -> Void)?, failure: ((LoaderError) -> Void)?) {
         guard
             let url = URL(string: Settings.apiDomain + "newTaipei/garbageTruck/area") else {
             // precondition < assert < fatalError
@@ -23,10 +23,8 @@ final class MainVC: BaseTableVC<AreaCell, String> {
         request.httpMethod = "POST"
         
         let loadDataObject = SessionLoader<AreaContentModel>(request: request)
-        loadDataObject.loadData{
-            model in
-            success?(model.data)
-        }
+        let successHandle: (AreaContentModel) -> Void = { success?($0.data) }
+        loadDataObject.loadData (success: successHandle, failure: failure)
     }
     
     override func configCell(model: String, cell: AreaCell) {
